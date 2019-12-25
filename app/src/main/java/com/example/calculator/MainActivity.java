@@ -2,7 +2,9 @@ package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     Button one,two,three,four,five,six,seven,eight,nine,zero,dot,equal,calcel,add,mul,sub,div,delete;
     boolean addition,substraction,multiplication,division,decimal = false;
     double input1,input2;
-   int index;
+    int index;
+    Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
         sub = findViewById(R.id.sub);
         div = findViewById(R.id.div);
         delete = findViewById(R.id.delete);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        DecimalFormat decimalFormat = new DecimalFormat();
+
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 String dispalytext = result.getText().toString();
                 int lenght = dispalytext.length();
                 if(lenght>0){
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         calcel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 result.setText(null);
             }
         });
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("0");
 
             }
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("1");
 
             }
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("9");
 
             }
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("2");
 
             }
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("3");
 
             }
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("4");
 
             }
@@ -115,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("5");
 
             }
@@ -123,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("6");
 
             }
@@ -131,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         seven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("7");
 
             }
@@ -139,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append("8");
 
             }
@@ -147,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vibrator.vibrate(100);
                 result.append(".");
 
 
@@ -157,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 String content =result.getText().toString();
                  index = Integer.parseInt(String.valueOf(content.length()+1));
                 input1 = Double.parseDouble(content);
@@ -168,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 String content =result.getText().toString();
                  index = Integer.parseInt(String.valueOf(content.length()+1));
                 input1 = Double.parseDouble(content);
@@ -179,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
         mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 String content =result.getText().toString();
                  index = Integer.parseInt(String.valueOf(content.length()+1));
                 input1 = Double.parseDouble(content);
@@ -190,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrator.vibrate(100);
                 String content =result.getText().toString();
                  index = Integer.parseInt(String.valueOf(content.length()+1));
                 input1 = Double.parseDouble(content);
@@ -202,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         equal.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if(addition==true){
@@ -225,7 +236,8 @@ public class MainActivity extends AppCompatActivity {
                 if(division==true){
                     String context = result.getText().toString();
                     input2 = Double.parseDouble(context.substring(index,context.length()));
-                    result.setText(String.valueOf (input1/input2));
+                    String myresult = new DecimalFormat("##.####").format(input1/input2);
+                    result.setText(myresult);
                     division = false;
                 }
 
